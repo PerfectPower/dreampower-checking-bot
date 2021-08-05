@@ -24,6 +24,7 @@ class User:
     votes: list
     full: bool
     review: bool
+    lang: str
 
     def __post_init__(self):
         self.premium = self.premium == 1
