@@ -30,7 +30,7 @@ class Channel:
         else:
             self._ids = f"{user_id},"
 
-        self._update('ids', f'"{self.ids}"')
+        self._update('ids', f'"{self._ids}"')
 
     def set_is_monitoring(self, value: bool):
         self.is_monitoring = value
