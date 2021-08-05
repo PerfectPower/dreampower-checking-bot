@@ -10,22 +10,25 @@ class Channel:
     id: int
     channel_id: int
     url: str
-    ids: List[int]
+    _ids: str
     lefts: int
     is_monitoring: bool
     notify: int
 
     def __post_init__(self):
-        self.ids = [int(id) for id in self.ids.split(',') if id] if self.ids else []
         self.channel_id = int(self.channel_id)
         self.notify = int(self.notify) if self.notify else None
         self.is_monitoring = self.is_monitoring == 1
 
+    @property
+    def ids(self):
+        return [int(id) for id in self._ids.split(',') if id] if self._ids else []
+
     def add_user(self, user_id: int):
-        if self.ids:
-            self.ids += f"{user_id},"
+        if self._ids:
+            self._ids += f"{user_id},"
         else:
-            self.ids = f"{user_id},"
+            self._ids = f"{user_id},"
 
         self._update('ids', f'"{self.ids}"')
 
